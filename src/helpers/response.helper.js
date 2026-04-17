@@ -4,23 +4,25 @@
 */
 
 // success response
-const successResponse = (res, message, data = {}, statusCode = 200) => {
+const successResponse = (res, message, data = {}, pagination={}, statusCode = 200) => {
     return res.status(statusCode).json({
         success: true,
         statusCode,
         message,
         data,
+        pagination,
         error: null
     });
 }
 
 // warning response
-const warningResponse = (res, message, statusCode = 400, data = {}) => {
+const warningResponse = (res, message, statusCode = 400, pagination={}, data = {}) => {
     return res.status(statusCode).json({
         success: false,
         statusCode,
         message,
         data,
+        pagination,
         error: null
     });
 }
