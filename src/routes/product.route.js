@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ImageController = require('../controllers/image.controller');
 const { getAllProducts, createNewProduct, updateProduct, deleteProduct } = require('../controllers/product.controller');
+const protect = require('../middlewares/auth.middleware');
+
+router.use(protect);
 
 // products
 router.get("/", getAllProducts);

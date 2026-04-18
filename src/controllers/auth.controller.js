@@ -35,7 +35,9 @@ const login = async (req, res) => {
 
         const token = generateToken(user);
 
-        successResponse(res, "Login successfully", {user, token});
+        const {password: _, ...userInfo} = user.toJSON();
+
+        successResponse(res, "Login successfully", {...userInfo, token});
     } catch(err) {
         errorResponse(res, "Error login", err.message);
     }
