@@ -1,6 +1,6 @@
 const { Op, col } = require("sequelize");
 const sequelize = require("../../config/db");
-const { Product, Category } = require("../../models");
+const { Product, Category, ProductImage } = require("../../models");
 const { errorResponse, successResponse, warningResponse } = require("../helpers/response.helper");
 
 // GET : /api/v1/products
@@ -24,6 +24,11 @@ const getAllProducts = async (req, res) => {
                 {
                     model: Category,
                     as: "category"
+                },
+                {
+                    model: ProductImage,
+                    as: "images",
+                    attributes: ["image_id", "image_url"]
                 }
             ],
             where,

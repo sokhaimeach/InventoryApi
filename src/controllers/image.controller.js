@@ -84,7 +84,9 @@ exports.DeleteImage = async (req, res) => {
 
     const fileName = image.image_url.split("/").pop();
     const filePath = path.join(process.cwd(), "src/uploads/products", fileName);
-    await fs.removeSync(filePath);
+    await fs.unlinkSync(filePath);
+    
+    await image.destroy();
 
     successResponse(res, "Remove image successfully");
   } catch (err) {

@@ -5,12 +5,23 @@ const cors = require("cors");
 const PORT = 3000;
 const db = require('./config/db');
 const fileUpload = require('express-fileupload');
+var path = require('path');
 
 // allowed origins
-const allowedOrigins = ["http://localhost:5173/"]
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
 
 app.use(express.json());
-app.use(cors(allowedOrigins));
+app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+app.use(cors(corsOptions));
 app.use(
     fileUpload({
         limits: {fileSize: 3 * 1024 * 1024},

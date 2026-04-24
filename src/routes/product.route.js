@@ -16,5 +16,6 @@ router.delete("/:id", deleteProduct);
 router.post('/:id/upload', ImageController.UploadImage);
 
 router.get("/:id/download", ImageController.DownloadImage);
+router.delete("/image/:id/delete", ImageController.DeleteImage);
 
 module.exports = router;
