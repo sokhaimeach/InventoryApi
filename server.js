@@ -33,12 +33,14 @@ const authRoutes = require('./src/routes/auth.route');
 const customerRoutes = require('./src/routes/customer.route');
 const productRoutes = require('./src/routes/product.route');
 const categoryRoutes = require('./src/routes/category.route');
+const orderRoutes = require('./src/routes/order.route');
 
 // register routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/customer', customerRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/categories', categoryRoutes);
+app.use('/api/v1/orders', orderRoutes);
 
 
 // connect to database

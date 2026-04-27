@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init(
     {
+      order_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       customer_id: DataTypes.INTEGER,
       order_number: DataTypes.STRING,
       total: DataTypes.DECIMAL,
@@ -32,6 +38,19 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Order",
+      timestamps: true,
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      hooks: {
+        beforeCreate: async (order) => {
+          // generate order number using current timestamp and random number
+          order.order_number =
+            "ORD-" +
+            Date.now() +
+            "-" +
+            Math.floor(Math.random() * 1000);
+        },
+      }
     },
   );
   return Order;

@@ -5,7 +5,7 @@ const { warningResponse, errorResponse } = require('../helpers/response.helper')
 const protect = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
-        if(!authHeader && !authHeader.startsWith("Bearer ")) {
+        if(!authHeader || !authHeader.startsWith("Bearer ")) {
             return warningResponse(res, "Not authorized, no token provided", 401);
         }
 

@@ -18,15 +18,34 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   OrderDetail.init({
+    orderdetail_id: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     order_id: DataTypes.INTEGER,
     product_id: DataTypes.INTEGER,
     product_name: DataTypes.STRING,
-    priduct_price: DataTypes.DECIMAL,
+    product_price: DataTypes.DECIMAL,
     qty: DataTypes.INTEGER,
     amount: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'OrderDetail',
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+
+    // calculate amount before create and update
+    hooks: {
+      beforeCreate: async (orderItem) => {
+        orderItem.amount = Number(orderItem.product_price) * orderItem.qty;
+      },
+      beforeUpdate: async (orderItem) => {
+        orderItem.amount = Number(orderItem.product_price) * orderItem.qty;
+      }
+    }
   });
   return OrderDetail;
 };

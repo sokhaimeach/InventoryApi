@@ -28,7 +28,7 @@ module.exports = {
       product_name: {
         type: Sequelize.STRING,
       },
-      priduct_price: {
+      product_price: {
         type: Sequelize.DECIMAL(10, 2),
       },
       qty: {
